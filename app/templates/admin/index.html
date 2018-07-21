@@ -1,0 +1,29 @@
+{% extends 'admin/admin-layout.html' %}
+{% block title %}{{ super() }}{% endblock %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      {{ wtf.quick_form(categoryForm) }}
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      {{ wtf.quick_form(blogForm) }}
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      {{ wtf.quick_form(portfolioForm) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

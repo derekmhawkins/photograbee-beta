@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Blog</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section BLOG SIDEBAR list-->
+<section id="section-blog-list" class="section-blog">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <!-- blog POSTS LIST-->
+        <div class="col-lg-9 col-md-8">
+          {% if not posts %}
+          <header class="header-section">
+            <h2 class="text-center">You don't have any posts... yet.</h2>
+          </header>
+          {% else %}
+          <!-- blog post -->
+          {% for p in posts %}
+          <article class="blog-post blog-post-preview">
+            <!-- post media (image, video, iframe, etc)-->
+            <div class="post-media">
+              <a href="/blog/{{ p.id }}">
+                <img src="{{ url_for('uploaded_file', filename=p.image) }}" alt="" class="img-responsive">
+              </a>
+            </div>
+            <!-- END post media (image, video, iframe, etc)-->
+            <!-- post content-->
+            <div class="post-content">
+              <header class="post-header"><a href="/blog/{{ p.id }}">
+                  <h2>{{ p.title }}</h2></a></header>
+              <ul class="list-post-info">
+                <li class="info-author"><a href="#" onclick="return false;"><i class="pe-7s-user"></i><span>{{ p.author.name }}</span></a></li>
+                <li class="info-datetime"><a href="/blog/{{ p.id }}"><i class="pe-7s-timer"></i>
+                    <time datetime="{{ p.created_on }}">{{ moment(p.created_on).fromNow() }}</time></a></li>
+                <li class="info-comments"><a href="/blog/{{ p.id }}#section-comments"><i class="pe-7s-comment"></i><span>{{ comments_count(p.id) }} Comments</span></a></li>
+                <li class="info-category"><a href="/blog/category/{{ p.cat.id }}"><span>{{ p.cat.name }}</span></a></li>
+              </ul>
+              <div class="post-descr">
+                <p>{{ p.body|truncate(255) }}</p>
+              </div>
+              <footer class="post-footer">
+                <!-- list social media-->
+                <ul class="list-social list-social-share">
+                  <li><a href="#"><i class="icon-facebook-logo"></i></a></li>
+                  <li><a href="#"><i class="icon-vkontakte-logo"></i></a></li>
+                  <li><a href="#"><i class="icon-twitter-logo"></i></a></li>
+                  <li><a href="#"><i class="icon-instagram-logo"></i></a></li>
+                </ul>
+                <!-- END list social media--><a href="/blog/{{ p.id }}" class="btn btn-secondary btn-secondary-bright">Read more</a>
+              </footer>
+            </div>
+            <!-- END post content-->
+          </article>
+          {% endfor %}
+          <!-- END blog post -->
+          <!-- pagination-->
+          <ul class="list-pagination">
+            {% if prev_url %}
+            <li><a href="{{ prev_url }}"><i class="pe-7s-angle-left"></i></a></li>
+            {% endif %}
+            <li><a href="#" onclick="return false;">...</a></li>
+            {% if next_url %}
+            <li><a href="{{ next_url }}"><i class="pe-7s-angle-right"></i></a></li>
+            {% endif %}
+          </ul>
+          <!-- END pagination-->
+          {% endif %}
+        </div>
+        <!-- END blog POSTS LIST-->
+        <!-- blog SIDEBAR-->
+        {% include 'partials/sidebar.html' %}
+        <!-- END blog SIDEBAR-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section BLOG SIDEBAR list-->
+{% endblock %}

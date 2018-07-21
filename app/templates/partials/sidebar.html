@@ -1,0 +1,77 @@
+<div class="col-lg-3 col-md-4">
+  <aside class="blog-sidebar">
+    <!-- sidebar section about-->
+    <section class="blog-sidebar-section">
+      <h3>About</h3>
+      <p class="text-about">
+        <em>Hello! I'm Shelby Cherie. For over X years I've worked as a professional photographer. In this blog I write about cool
+          photography stuff, my showcases, traveling and a lot more. I hope will enjoy the reading!</em>
+      </p>
+    </section>
+    <!-- END sidebar section about-->
+    <!-- sidebar section categories-->
+    <section class="blog-sidebar-section">
+      <h3>Categories</h3>
+      {% if not category %}
+      <p>No categories yet.</p>
+      {% else %}
+      <ul class="list-categories-sidebar">
+        {% for c in category %}
+        <li>
+          <a href="/blog/category/{{ c.id }}">{{ c.name }}
+            <span>[{{ category_count(c.id) }}]</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
+    <!-- END sidebar section categories-->
+    <!-- sidebar section posts - hot-->
+    <!-- <section class="blog-sidebar-section">
+      <h3>Hot posts</h3>
+      <ul class="list-posts list-posts-popular">
+        <li>
+          <a href="blog-singlepost-sidebar.html">
+            <h5>Should you mix business and personal photos on Instagram?</h5>
+          </a>
+        </li>
+      </ul>
+    </section> -->
+    <!-- END sidebar section posts - hot-->
+    <!-- sidebar section posts - new-->
+    <section class="blog-sidebar-section">
+      <h3>New posts</h3>
+      {% if not new_posts %}
+      <p>No posts yet.</p>
+      {% else %}
+      <ul class="list-posts list-posts-popular">
+        {% for p in new_posts[::-1] %}
+        <li>
+          <a href="/blog/{{ p.id }}">
+            <h5>{{ p.title }}</h5>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
+    <!-- END sidebar section posts - new-->
+    <!-- sidebar section posts - tags-->
+    <section class="blog-sidebar-section">
+      <h3>Tags</h3>
+      {% if not tags %}
+      <p>No tags yet.</p>
+      {% else %}
+      <ul class="list-tags">
+        {% for t in tags %}
+        <li>
+          <a href="/blog/tag/{{ t.id }}">{{ t.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </section>
+    <!-- END sidebar section posts - tags-->
+  </aside>
+</div>

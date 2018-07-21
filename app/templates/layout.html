@@ -1,0 +1,107 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Photo{% endblock %}
+
+{% block styles %}
+  <!-- CSS Links-->
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pe-icon-7-stroke.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/freepik.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/blueimp-gallery.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+  <!-- Custom CSS-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- ICONS Links-->
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='img/favicon/apple-icon-57x57.png') }}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='img/favicon/apple-icon-60x60.png') }}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='img/favicon/apple-icon-72x72.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/favicon/apple-icon-76x76.png') }}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='img/favicon/apple-icon-114x114.png') }}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='img/favicon/apple-icon-120x120.png') }}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='img/favicon/apple-icon-144x144.png') }}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='img/favicon/apple-icon-152x152.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-icon-180x180.png') }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img/favicon/android-icon-192x192.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='img/favicon/favicon-96x96.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='img/favicon/manifest.json') }}">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicon/ms-icon-144x144.png') }}">
+  <meta name="theme-color" content="#ffffff">
+{% endblock %}
+
+{% block navbar %}
+  <header class="main-header">
+    {% include 'partials/header-navbar.html' %}
+  </header>
+{% endblock %}
+{% block content %}
+
+  {% block app_content %}{% endblock %}
+
+  <footer class="main-footer">
+    {% include 'partials/footer-navbar.html' %}
+  </footer>
+  <!-- blueimp gallery container-->
+  <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <div class="wrapper-slide-info">
+      <div class="slide-info"></div>
+    </div>
+    <div class="wrapper-slide-controls">
+      <div class="slide-controls"><a href="#" class="prev"><i class="pe-7s-angle-left"></i></a>
+        <div class="slide-controls-counter"><span class="slide-current"></span><span class="slide-total"></span></div><a href="#" class="next"><i class="pe-7s-angle-right"></i></a>
+      </div>
+    </div><a href="#" class="close"><i class="pe-7s-close"></i></a>
+  </div>
+  <!-- END blueimp gallery container-->
+  <!-- modal form-->
+  <!-- <div id="formModal" tabindex="-1" role="dialog" aria-labelledby="Photosession Inquiry" class="modal fade form-modal">
+    <div class="modal-wrapper">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Photosession Inquiry</h2><a href="#" data-dismiss="modal" class="close"><i class="pe-7s-close"></i></a>
+          </div>
+          <form action="mail.php" method="POST" class="form-contact">
+            <input type="text" name="visitor_name" placeholder="Your Name *" required>
+            <input type="email" name="visitor_email" title="Please enter a valid e-mail like user@example.com" placeholder="Your E-mail *" required>
+            <textarea name="visitor_msg" placeholder="Your Message..."></textarea>
+            <input type="submit" value="Send message" class="btn btn-cta">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+{% endblock %}
+  <!-- END modal form-->
+  <!-- JS Links-->
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.equalheights.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.blueimp-gallery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/jquery.counterup.min.js') }}"></script>
+  <!-- Custom JS-->
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <!-- PAGE CUSTOM JS-->
+  <script>
+    // init parallax
+    $.stellar();
+  </script>
+  <script>
+    $('body').attr('class', 'header-absolute');
+    $('<div class="flash-messages"><div class="container"><div class="col-md-6">{% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}<div class="alert-info" role="alert">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}</div></div></div>').insertAfter('#flash-messages');
+  </script>
+  {{ moment.include_moment() }}
+{% endblock %}

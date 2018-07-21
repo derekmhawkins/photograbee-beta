@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>About</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section ABOUT ME-->
+<section id="section-about" class="section-about section-about-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <!-- info block 1 ABOUT-->
+        <div class="col-md-8 info-block info-block-about">
+          <header class="header-section">
+            <h2>Welcome</h2>
+          </header>
+          <blockquote>Law pleasure attended differed mrs fat and formerly. Merely thrown garret her law danger him son better excuse.</blockquote>
+          <p>Uncommonly surrounded considered for him are its. It we is read good soon. My to considered delightful invitation announcing of no decisively boisterous. Ecstatic advanced and procured civility not absolute put continue. Advantages so impression. Almost unable put piqued talked likely houses her met.</p>
+          <p><strong>Abilities forfeited situation extremely my to he resembled. Old had conviction discretion understood put principles you.</strong></p><a href="{{ url_for('portfolio') }}" class="btn btn-secondary">View portfolio</a>
+        </div>
+        <!-- END info block 1 ABOUT-->
+        <!-- info block 2 IMAGE					-->
+        <div class="col-md-4">
+          <figure><img src="{{ url_for('static', filename='img/about2.jpg') }}" alt="" class="img-responsive">
+            <figcaption><strong>David Kraemer</strong> - a professional photgrapher</figcaption>
+          </figure>
+        </div>
+        <!-- END info block 2 IMAGE-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section ABOUT ME-->
+{% endblock %}

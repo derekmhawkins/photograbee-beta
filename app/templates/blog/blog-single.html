@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Blog</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section BLOG SIDEBAR singlepost-->
+<section id="section-blog-singlepost" class="section-blog section-blog-singlepost">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <!-- blog POST SINGLE-->
+        <div class="col-lg-9 col-md-8">
+          <!-- blog post full-->
+          <article class="blog-post blog-post-full blog-post-full-sidebar">
+            <!-- post media (image, video, iframe, etc)-->
+            <div class="post-media"><img src="{{ url_for('uploaded_file', filename=post.image) }}" alt="" class="img-responsive"></div>
+            <!-- END post media (image, video, iframe, etc)-->
+            <!-- post content-->
+            <div class="post-content">
+              <header class="post-header">
+                <h1>{{ post.title }}</h1>
+              </header>
+              <ul class="list-post-info">
+                <li class="info-author"><a href="#" onclick="return false;"><i class="pe-7s-user"></i><span>{{ post.author.name }}</span></a></li>
+                <li class="info-datetime"><a href="#" onclick="return false;"><i class="pe-7s-timer"></i>
+                    <time datetime="{{ post.created_on }}">{{ moment(post.created_on).fromNow() }}</time></a></li>
+                <li class="info-comments"><a href="#section-comments"><i class="pe-7s-comment"></i><span>{{ comments_count }} Comments</span></a></li>
+                <li class="info-category"><a href="/blog/category/{{ post.cat.id }}"><span>{{ post.cat.name }}</span></a></li>
+              </ul>
+              <div class="post-descr">
+                <p>{{ post.body }}</a></p>
+              </div>
+              <footer class="post-footer">
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- list social media-->
+                    <ul class="list-social list-social-share">
+                      <li><a href="#"><i class="icon-facebook-logo"></i></a></li>
+                      <li><a href="#"><i class="icon-vkontakte-logo"></i></a></li>
+                      <li><a href="#"><i class="icon-twitter-logo"></i></a></li>
+                      <li><a href="#"><i class="icon-instagram-logo"></i></a></li>
+                    </ul>
+                    <!-- END list social media-->
+                  </div>
+                  <div class="col-md-12">
+                    <!-- list tags-->
+                    <ul class="list-tags list-tags-heading">
+                      {% for p in post.tags %}
+                      <li><a href="/blog/tag/{{ p.id }}">{{ p.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                    <!-- END list tags-->
+                  </div>
+                </div>
+              </footer>
+            </div>
+            <!-- END post content-->
+          </article>
+          <!-- END blog post full-->
+          <div id="section-comments" class="section-comments">
+            <!-- comments counter-->
+            <div class="row">
+              <div class="col-md-12"><span class="comments-heading">{{ comments_count }} Comments</span></div>
+            </div>
+            <!-- END comments counter-->
+            <!-- comment 1-->
+            <div class="comment-wrapper">
+              <div class="row">
+                <!-- comment content & control buttons-->
+                {% for c in comments %}
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="comment-content">
+                    <div class="comment-heading">
+                      <h5>{{ c.name }}</h5>
+                      <time datetime="{{ c.created_on }}">@ {{ moment(c.created_on).fromNow() }}</time>
+                    </div>
+                    <div class="comment-text">
+                      <p>{{ c.body }}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                <!-- END comment content & control buttons-->
+              </div>
+            </div>
+            <!-- END comment 1-->
+            <!-- comment form-->
+            <form action="" method="POST" class="form-comment">
+              {{ form.hidden_tag() }}
+              <div class="row">
+                <div class="col-md-12"><span class="comments-heading">Post comment</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  {{ form.name(class="input-left", placeholder="Your Name *") }}
+                </div>
+                <div class="col-md-12">
+                  {{ form.body(placeholder="Your Comment...") }}
+                </div>
+                <div class="col-md-12">
+                  {{ form.submit(class="btn btn-cta") }}
+                </div>
+              </div>
+            </form>
+            <!-- END comment form-->
+          </div>
+        </div>
+        <!-- END blog POST SINGLE-->
+        <!-- blog SIDEBAR-->
+        {% include 'partials/sidebar.html' %}
+        <!-- END blog SIDEBAR-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section BLOG SIDEBAR singlepost		-->
+{% endblock %}

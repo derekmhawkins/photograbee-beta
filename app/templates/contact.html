@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Contact</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section CONTACTS-->
+<section id="section-contacts" class="section-contacts">
+  <div class="container">
+    <div class="row">
+      {% include 'partials/contact.html' %}
+    </div>
+  </div>
+</section>
+<!-- END section CONTACTS-->
+{% endblock %}

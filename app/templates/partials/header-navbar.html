@@ -1,0 +1,51 @@
+<nav class="nav-top">
+  <!-- logo-->
+  <div class="logo-wrapper">
+    <div class="logo-composition"><img src="{{ url_for('static', filename='img/logos/logo_bright.svg') }}" alt="" class="composition-img"></div>
+    <div class="text-composition"><span class="composition-text-primary">Photograbee</span><span class="composition-text-secondary">Photography</span></div>
+  </div>
+  <!-- END logo-->
+  <!-- menu toggle button-->
+  <div class="menu-wrapper">
+    <a href="" id="menu-toggle" class="menu-toggle"><span class="btn-menu"></span></a>
+  </div>
+  <!-- END menu toggle button-->
+  <!-- hamburger menu-->
+  <div id="hamburgermenu-wrapper" class="hamburgermenu-wrapper">
+    <!-- list menu-->
+    <ul class="list-top-menu">
+      {% if current_user.is_anonymous or current_user.is_authenticated %}
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('about') }}">About</a></li>
+      <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
+      <!-- <li><a href="{{ url_for('pricing') }}">Pricing</a></li> -->
+      <li><a href="{{ url_for('blog') }}">Blog</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact</a></li>
+      {% if not current_user.is_authenticated %}
+      <hr>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+      {% endif %}
+      {% endif %}
+      {% if current_user.is_admin %}
+      <hr>
+      <li><a href="{{ url_for('admin_blog') }}">New Post</a></li>
+      <li><a href="{{ url_for('admin_portfolio') }}">New Photo</a></li>
+      <hr>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% endif %}
+      <li>
+        <!-- list social media-->
+        <ul class="list-social">
+          <li><a href="#"><i class="icon-facebook-logo"></i></a></li>
+          <li><a href="#"><i class="icon-instagram-logo"></i></a></li>
+          <li><a href="#"><i class="icon-behance-logo"></i></a></li>
+          <li><a href="#"><i class="icon-twitter-logo"></i></a></li>
+        </ul>
+        <!-- END list social media-->
+      </li>
+    </ul>
+    <!-- END list menu-->
+  </div>
+  <!-- END hamburger menu-->
+</nav>

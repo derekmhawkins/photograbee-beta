@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section BLOG SIDEBAR singlepost-->
+<section id="section-blog-singlepost" class="admin section-blog section-blog-singlepost">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 col-md-8">
+          <div id="flash-messages"></div>
+          <div id="section-comments" class="section-comments">
+            <div class="col-md-10 col-md-offset-2">
+              <form action="/add-category" method="POST" class="form-comment">
+                {{ categoryForm.hidden_tag() }}
+                <div class="row">
+                  <div class="col-md-12">
+                    <header class="header-section">
+                      <h2>Category</h2>
+                      <span class="heading-extra">&nbsp;form</span>
+                    </header>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    {{ categoryForm.name(placeholder='Category Name') }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    {{ categoryForm.submitCategory(placeholder='Category Name', class='btn btn-cta') }}
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+              {% if not category %}
+              <h3>You need to create a category to make a post. Please make one!</h3>
+              {% else %}
+              <form enctype="multipart/form-data" method="POST" class="form-comment form-admin">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                  <div class="col-md-12">
+                    <header class="header-section">
+                      <h2>Blog</h2>
+                      <span class="heading-extra">&nbsp;form</span>
+                    </header>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    {{ form.name(size=50, value=current_user.name, readonly=readonly) }}
+                  </div>
+                  <div class="col-md-12">
+                    {{ form.image(size=50, class='file-upload', placeholder="Upload a photo *") }}
+                  </div>
+                  <div class="col-md-12">
+                    {{ form.title(size=50, placeholder="Title *") }}
+                  </div>
+                  <div class="col-md-12">
+                    {{ form.body(size=50, placeholder="Make a post...") }}
+                  </div>
+                  <div class="col-md-12">
+                    <h4>{{ form.category(class='category') }}</h4>
+                  </div>
+                  <div class="col-md-12">
+                    <h4>{{ form.tags.label }}</h4>
+                  </div>
+                  <div class="col-md-12">
+                    {{ form.tags(placeholder='e.g.: photography, sunrise, ...') }}
+                  </div>
+                  <div class="col-md-12">
+                    {{ form.submit(class='btn btn-cta') }}
+                  </div>
+                </div>
+              </form>
+              {% endif %}
+            </div>
+            <!-- END comment form-->
+          </div>
+        </div>
+        <!-- END blog POST SINGLE-->
+        <!-- blog SIDEBAR-->
+        {% include 'partials/sidebar.html' %}
+        <!-- END blog SIDEBAR-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section BLOG SIDEBAR singlepost		-->
+{% endblock %}

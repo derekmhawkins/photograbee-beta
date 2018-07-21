@@ -1,0 +1,170 @@
+{% extends 'layout.html' %}
+{% block title %}{{ title }} | {{ super() }}{% endblock %}
+
+{% block app_content %}
+<!-- section INTRO-->
+<section id="section-intro" class="section-intro-regular">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Portfolio</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section INTRO-->
+<!-- section PORTFOLIO-->
+<section id="section-portfolio" class="section-portfolio section-portfolio-regular">
+  <!-- portfolio isotope filter-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 no-padding">
+        <ul class="list-portfolio-categories filter-button-group">
+          <li><a href="#" data-filter="*">All</a></li>
+          <li><a href="#" data-filter=".portfolio-item-cat-1">Wedding</a></li>
+          <li><a href="#" data-filter=".portfolio-item-cat-2">Studio</a></li>
+          <li><a href="#" data-filter=".portfolio-item-cat-3">Travel</a></li>
+          <li><a href="#" data-filter=".portfolio-item-cat-4">Nature</a></li>
+          <li><a href="#" data-filter=".portfolio-item-cat-5">Events</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- END portfolio isotope filter-->
+  <!-- portfolio masonry grid-->
+  <div class="container-fluid">
+    <div class="row">
+      <div id="grid-portfolio" class="grid-portfolio">
+        <div class="col-md-4 col-sm-6 col-xs-12 grid-sizer"></div>
+        <!-- masonry grid item 1-->
+        {% for studio in studios %}
+        <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-2">
+          <a href="{{ url_for('portfolio_file', filename=studio.image) }}" class="gallery-item-link">
+            <div class="gallery-item-link-overlay"></div>
+            <img src="{{ url_for('portfolio_file', filename=studio.image) }}" alt="">
+            <div class="item-content">
+              <div class="item-content-wrapper">
+                <h3>{{ studio.model_name }}<span>{{ studio.event }}</span></h3>
+                <div class="item-content-description">
+                  <p>{{ studio.synopsis }}</p>
+                </div>
+                <ul class="list-technical">
+                  <li><i class="icon-camera"></i>{{ studio.camera }}</li>
+                  <li><i class="icon-lens"></i>{{ studio.lens }}</li>
+                  <li><i class="icon-shutter"></i>{{ studio.focus }}</li>
+                  <li><i class="icon-exposure"></i>{{ studio.shutter }}</li>
+                  <li><i class="icon-iso"></i>{{ studio.iso }}</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <!-- END masonry grid item 1-->
+        <!-- masonry grid item 2-->
+        {% for event in events %}
+          <a href="{{ url_for('portfolio_file', filename=event.image) }}" class="gallery-item-link">
+            <div class="gallery-item-link-overlay"></div>
+            <img src="{{ url_for('portfolio_file', filename=event.image) }}" alt="">
+            <div class="item-content">
+              <div class="item-content-wrapper">
+                <h3>{{ event.model_name }}<span>{{ event.event }}</span></h3>
+                <div class="item-content-description">
+                  <p>{{ event.synopsis }}</p>
+                </div>
+                <ul class="list-technical">
+                  <li><i class="icon-camera"></i>{{ event.camera }}</li>
+                  <li><i class="icon-lens"></i>{{ event.lens }}</li>
+                  <li><i class="icon-shutter"></i>{{ event.focus }}</li>
+                  <li><i class="icon-exposure"></i>{{ event.shutter }}</li>
+                  <li><i class="icon-iso"></i>{{ event.iso }}</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <!-- END masonry grid item 2-->
+        <!-- masonry grid item 4-->
+        {% for travel in travels %}
+        <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-3">
+          <a href="{{ url_for('portfolio_file', filename=travel.image) }}" class="gallery-item-link">
+            <div class="gallery-item-link-overlay"></div>
+            <img src="{{ url_for('portfolio_file', filename=travel.image) }}" alt="">
+            <div class="item-content">
+              <div class="item-content-wrapper">
+                <h3>{{ travel.model_name }}<span>{{ travel.event }}</span></h3>
+                <div class="item-content-description">
+                  <p>{{ travel.synopsis }}</p>
+                </div>
+                <ul class="list-technical">
+                  <li><i class="icon-camera"></i>{{ travel.camera }}</li>
+                  <li><i class="icon-lens"></i>{{ travel.lens }}</li>
+                  <li><i class="icon-shutter"></i>{{ travel.focus }}</li>
+                  <li><i class="icon-exposure"></i>{{ travel.shutter }}</li>
+                  <li><i class="icon-iso"></i>{{ travel.iso }}</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <!-- END masonry grid item 4-->
+        <!-- masonry grid item 5-->
+        {% for photo in weddings %}
+        <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-1">
+          <a href="{{ url_for('portfolio_file', filename=photo.image) }}" class="gallery-item-link">
+            <div class="gallery-item-link-overlay"></div>
+            <img src="{{ url_for('portfolio_file', filename=photo.image) }}" alt="">
+            <div class="item-content">
+              <div class="item-content-wrapper">
+                <h3>{{ photo.model_name }}<span>{{ photo.event }}</span></h3>
+                <div class="item-content-description">
+                  <p>{{ photo.synopsis }}</p>
+                </div>
+                <ul class="list-technical">
+                  <li><i class="icon-camera"></i>{{ photo.camera }}</li>
+                  <li><i class="icon-lens"></i>{{ photo.lens }}</li>
+                  <li><i class="icon-shutter"></i>{{ photo.focus }}</li>
+                  <li><i class="icon-exposure"></i>{{ photo.shutter }}</li>
+                  <li><i class="icon-iso"></i>{{ photo.iso }}</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <!-- END masonry grid item 5-->
+        <!-- masonry grid item 16-->
+        {% for nature in natures %}
+        <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-4">
+          <a href="{{ url_for('portfolio_file', filename=nature.image) }}" class="gallery-item-link">
+            <div class="gallery-item-link-overlay"></div>
+            <img src="{{ url_for('portfolio_file', filename=nature.image) }}" alt="">
+            <div class="item-content">
+              <div class="item-content-wrapper">
+                <h3>{{ nature.model_name }}<span>{{ nature.event }}</span></h3>
+                <div class="item-content-description">
+                  <p>{{ nature.synopsis }}</p>
+                </div>
+                <ul class="list-technical">
+                  <li><i class="icon-camera"></i>{{ nature.camera }}</li>
+                  <li><i class="icon-lens"></i>{{ nature.lens }}</li>
+                  <li><i class="icon-shutter"></i>{{ nature.focus }}</li>
+                  <li><i class="icon-exposure"></i>{{ nature.shutter }}</li>
+                  <li><i class="icon-iso"></i>{{ nature.iso }}</li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        <!-- END masonry grid item 16-->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END section PORTFOLIO -->
+{% endblock %}
