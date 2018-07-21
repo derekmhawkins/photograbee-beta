@@ -1,1 +1,1 @@
-web: flask db upgrade; flask translate compile; gunicorn main:app --log-file=-
+web: flask db upgrade; flask translate compile; gunicorn -w 1 main:app --preload --log-file=-
