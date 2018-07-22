@@ -1,4 +1,4 @@
-import os, random, time, json, boto3
+import os, random, time, json, boto3, botocore
 from app import app, db, mail
 from flask import session, redirect, render_template, url_for, flash, send_from_directory, request
 from app.models import User, Post, Category, Comment, Tag, Photo, Genre
@@ -7,6 +7,29 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 from flask_mail import Message
+
+s3 = boto3.client(
+  "s3",
+  aws_access_key_id=os.getenv('S3_KEY'),
+  aws_secret_access_key=os.getenv('S3_SECRET')
+)
+
+def upload_file_to_s3(file, bucket_name, acl="public-read"):
+  try:
+    s3.upload_fileobj(
+      file,
+      bucket_name,
+      file.filename,
+      ExtraArgs= {
+        "ACL": acl,
+        "ContentType": file.content_type
+      }
+    )
+  except Exception as e:
+    # This is a catch all exception, edit this part to fit your needs.
+    print("Something Happened: ", e)
+    return e
+  return f"{app.config['S3_LOCATION']}{file.filename}"
 
 def category_count(num):
   return Category.query.get(num).posts.count()
@@ -206,11 +229,13 @@ def admin_portfolio():
   }
   context['portfolioForm'].genre.choices = context['genre_choices']
   if context['portfolioForm'].validate_on_submit():
-    if not os.path.exists(app.config['PORTFOLIO_FOLDER']):
-      os.makedirs(app.config['PORTFOLIO_FOLDER'])
-    filename = str(int(time.time())) + '.png'
-    context['portfolioForm'].image.data.save(os.path.join(app.config['PORTFOLIO_FOLDER'], filename))
-    db.session.add(Photo(model_name=context['portfolioForm'].model_name.data, image=filename, event=context['portfolioForm'].event.data, synopsis=context['portfolioForm'].synopsis.data, camera=context['portfolioForm'].camera.data, lens=context['portfolioForm'].lens.data, focus=context['portfolioForm'].focus.data, shutter=context['portfolioForm'].shutter.data, iso=context['portfolioForm'].iso.data, genre_id=context['portfolioForm'].genre.data))
+    # if not os.path.exists(app.config['PORTFOLIO_FOLDER']):
+    #   os.makedirs(app.config['PORTFOLIO_FOLDER'])
+    # filename = str(int(time.time())) + '.png'
+    # context['portfolioForm'].image.data.save(os.path.join(app.config['PORTFOLIO_FOLDER'], filename))
+    file = request.files["image"]
+    file.filename = str(int(time.time())) + '.png'
+    db.session.add(Photo(model_name=context['portfolioForm'].model_name.data, image=upload_file_to_s3(file, os.getenv('S3_BUCKET')), event=context['portfolioForm'].event.data, synopsis=context['portfolioForm'].synopsis.data, camera=context['portfolioForm'].camera.data, lens=context['portfolioForm'].lens.data, focus=context['portfolioForm'].focus.data, shutter=context['portfolioForm'].shutter.data, iso=context['portfolioForm'].iso.data, genre_id=context['portfolioForm'].genre.data))
     db.session.commit()
     flash("Photo saved successfully")
     return redirect(url_for('admin_portfolio'))
@@ -233,28 +258,16 @@ def admin_blog():
   }
   context['form'].category.choices = context['categories']
   context['form'].tags.choices = context['tag_choices']
-  print(app.config['S3_BUCKET'])
+  
   if context['form'].validate_on_submit():
     # Blog form
     # if not os.path.exists(app.config['UPLOAD_FOLDER']):
     #   os.makedirs(app.config['UPLOAD_FOLDER'])
     # filename = str(int(time.time())) + '.png'
     # context['form'].image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    S3_BUCKET = app.config['S3_BUCKET']
-    file_name = str(int(time.time()))
-    file_type = '.png'
-    s3 = boto3.client('s3')
-    presigned_post = s3.generate_presigned_post(
-      Bucket=S3_BUCKET,
-      Key=file_name,
-      Fields={"acl": "public-read", "Content-Type": file_type},
-      Conditions=[
-          {"acl": "public-read"},
-          {"Content-Type": file_type}
-      ],
-      ExpiresIn=3600
-    )
-    post = Post(title=context['form'].title.data, image=f'https://{S3_BUCKET}.s3.amazonaws.com/{file_name}', body=context['form'].body.data, author=current_user, category_id=context['form'].category.data)
+    file = request.files["image"]
+    file.filename = str(int(time.time())) + '.png'
+    post = Post(title=context['form'].title.data, image=upload_file_to_s3(file, os.getenv('S3_BUCKET')), body=context['form'].body.data, author=current_user, category_id=context['form'].category.data)
     tags = [i.strip() for i in context['form'].tags.data.split(',')]
     names = [i.name for i in Tag.query.all()]
 
@@ -269,11 +282,7 @@ def admin_blog():
     db.session.add(post)
     db.session.commit()
     flash("Your post has submitted successfully")
-
-    return json.dumps({
-        'data': presigned_post,
-        'url': f'https://{S3_BUCKET}.s3.amazonaws.com/{file_name}'
-    }), redirect(url_for('admin_blog'))
+    return redirect(url_for('admin_blog'))
   return render_template("admin/blog.html", **context)
 
 

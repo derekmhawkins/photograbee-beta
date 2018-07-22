@@ -3053,3 +3053,7 @@ a.disabled {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+.info-messages {
+  margin-bottom: 0;
+}

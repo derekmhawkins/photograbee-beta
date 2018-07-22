@@ -33,7 +33,7 @@
             <!-- post media (image, video, iframe, etc)-->
             <div class="post-media">
               <a href="/blog/{{ p.id }}">
-                <img src="{{ url_for('uploaded_file', filename=p.image) }}" alt="" class="img-responsive">
+                <img src="{{ p.image }}" alt="" class="img-responsive">
               </a>
             </div>
             <!-- END post media (image, video, iframe, etc)-->

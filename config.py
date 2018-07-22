@@ -16,6 +16,6 @@ class Config:
   MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
   ADMINS = ['derekhawkins.tech@gmail.com', 'derekmhawkins@gmail.com']
   LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
-  S3_BUCKET = 'photograbee'
+  S3_LOCATION = f"https://{os.getenv('S3_BUCKET')}.s3.amazonaws.com/"
 
 load_dotenv(os.path.join(Config.BASEDIR, '.env'))

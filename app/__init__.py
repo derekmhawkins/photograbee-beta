@@ -11,6 +11,7 @@ from logging.handlers import SMTPHandler
 
 app = Flask(__name__)
 app.config.from_object(Config)
+# app.config.from_object("flask_s3_upload.config")
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

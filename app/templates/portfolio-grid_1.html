@@ -41,9 +41,9 @@
         <!-- masonry grid item 1-->
         {% for studio in studios %}
         <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-2">
-          <a href="{{ url_for('portfolio_file', filename=studio.image) }}" class="gallery-item-link">
+          <a href="{{ studio.image }}" class="gallery-item-link">
             <div class="gallery-item-link-overlay"></div>
-            <img src="{{ url_for('portfolio_file', filename=studio.image) }}" alt="">
+            <img src="{{ studio.image }}" alt="">
             <div class="item-content">
               <div class="item-content-wrapper">
                 <h3>{{ studio.model_name }}<span>{{ studio.event }}</span></h3>
@@ -65,9 +65,9 @@
         <!-- END masonry grid item 1-->
         <!-- masonry grid item 2-->
         {% for event in events %}
-          <a href="{{ url_for('portfolio_file', filename=event.image) }}" class="gallery-item-link">
+          <a href="{{ event.image }}" class="gallery-item-link">
             <div class="gallery-item-link-overlay"></div>
-            <img src="{{ url_for('portfolio_file', filename=event.image) }}" alt="">
+            <img src="{{ event.image }}" alt="">
             <div class="item-content">
               <div class="item-content-wrapper">
                 <h3>{{ event.model_name }}<span>{{ event.event }}</span></h3>
@@ -90,9 +90,9 @@
         <!-- masonry grid item 4-->
         {% for travel in travels %}
         <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-3">
-          <a href="{{ url_for('portfolio_file', filename=travel.image) }}" class="gallery-item-link">
+          <a href="{{ travel.image }}" class="gallery-item-link">
             <div class="gallery-item-link-overlay"></div>
-            <img src="{{ url_for('portfolio_file', filename=travel.image) }}" alt="">
+            <img src="{{ travel.image }}" alt="">
             <div class="item-content">
               <div class="item-content-wrapper">
                 <h3>{{ travel.model_name }}<span>{{ travel.event }}</span></h3>
@@ -115,9 +115,9 @@
         <!-- masonry grid item 5-->
         {% for photo in weddings %}
         <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-1">
-          <a href="{{ url_for('portfolio_file', filename=photo.image) }}" class="gallery-item-link">
+          <a href="{{ photo.image }}" class="gallery-item-link">
             <div class="gallery-item-link-overlay"></div>
-            <img src="{{ url_for('portfolio_file', filename=photo.image) }}" alt="">
+            <img src="{{ photo.image }}" alt="">
             <div class="item-content">
               <div class="item-content-wrapper">
                 <h3>{{ photo.model_name }}<span>{{ photo.event }}</span></h3>
@@ -140,9 +140,9 @@
         <!-- masonry grid item 16-->
         {% for nature in natures %}
         <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item portfolio-item-cat-4">
-          <a href="{{ url_for('portfolio_file', filename=nature.image) }}" class="gallery-item-link">
+          <a href="{{ nature.image }}" class="gallery-item-link">
             <div class="gallery-item-link-overlay"></div>
-            <img src="{{ url_for('portfolio_file', filename=nature.image) }}" alt="">
+            <img src="{{ nature.image }}" alt="">
             <div class="item-content">
               <div class="item-content-wrapper">
                 <h3>{{ nature.model_name }}<span>{{ nature.event }}</span></h3>
