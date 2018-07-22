@@ -2,7 +2,6 @@ from flask import render_template
 from flask_mail import Message
 from app import app, mail
 from app.forms import ContactForm
-import requests
 
 def send_email(subject, sender, recipients, text_body, html_body):
   msg = Message(subject, sender=sender, recipients=recipients)
