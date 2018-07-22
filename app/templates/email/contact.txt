@@ -1,2 +1,10 @@
-Dear Photograbee,
+Dear {{ recipient_name }},
 
+You've been sent an inquiry via the contact form.
+
+Sender Name: {{ sender_name }}
+
+Sender Email: {{ sender_email }}
+
+Message:
+{{ sender_message }}

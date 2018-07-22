@@ -11,7 +11,6 @@ from logging.handlers import SMTPHandler
 
 app = Flask(__name__)
 app.config.from_object(Config)
-# app.config.from_object("flask_s3_upload.config")
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -35,26 +34,5 @@ if not app.debug:
         credentials=auth, secure=secure)
       mail_handler.setLevel(logging.ERROR)
       app.logger.addHandler(mail_handler)
-
-# def create_app(config_class=Config):
-#   app = Flask(__name__)
-#   app.config.from_object(config_class)
-#   if not app.debug:
-#     if app.config['LOG_TO_STDOUT']:
-#       stream_handler = logging.StreamHandler()
-#       stream_handler.setLevel(logging.INFO)
-#       app.logger.addHandler(stream_handler)
-#     else:
-#       if not os.path.exists('logs'):
-#         os.mkir('logs')
-#       file_handler = RotatingFileHandler('logs/main.log', maxBytes=10240, backupCount=10)
-#       file_handler.setFormatter(logging.Formatter('{asctime} {levelname}: {message} [in {pathname}: {lineno}]'))
-#       file_handler.setLevel(logging.INFO)
-#       app.logger.addHandler(file_handler)
-    
-#     app.logger.setLevel(logging.INFO)
-#     app.logger.info('Microblog startup')
-  
-#   return app
 
 from app import routes, models

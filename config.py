@@ -14,6 +14,7 @@ class Config:
   MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None or os.getenv('MAIL_USE_TLS')
   MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or os.getenv('MAIL_USERNAME')
   MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or os.getenv('MAIL_PASSWORD')
+  SECURITY_EMAIL_SENDER = 'derekhawkins.tech@gmail.com'
   ADMINS = ['derekhawkins.tech@gmail.com', 'derekmhawkins@gmail.com']
   LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
   S3_LOCATION = f"https://{os.getenv('S3_BUCKET')}.s3.amazonaws.com/"

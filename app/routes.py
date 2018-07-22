@@ -7,6 +7,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 from flask_mail import Message
+from app.email import send_contact_form_email
 
 s3 = boto3.client(
   "s3",
@@ -155,12 +156,13 @@ def contact():
 def contact_send():
   form = ContactForm()
   if form.validate_on_submit():
-    msg = Message('[Photograbee] {} has an inquiry'.format(form.name.data), sender=form.email.data, recipients=[app.config['ADMINS'][1]])
-    msg.body = form.body.data
-    msg.html = '<p>{}</p>'.format(form.body.data)
-    mail.send(msg)
+    # msg = Message('[Photograbee] {} has an inquiry'.format(form.name.data), sender=form.email.data, recipients=[app.config['ADMINS'][0]])
+    # msg.body = form.body.data
+    # msg.html = '<p>{}</p>'.format(form.body.data)
+    # mail.send(msg)
+    send_contact_form_email()
     flash("Your inquiry has been submitted.")
-    return redirect(url_for('contact'))
+    return redirect(url_for('index'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
