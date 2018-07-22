@@ -9,11 +9,11 @@ class Config:
   UPLOAD_FOLDER = BASEDIR + '/app/static/img/uploads'
   PORTFOLIO_FOLDER = BASEDIR + '/app/static/img/portfolio/uploads'
   POSTS_PER_PAGE = 5
-  MAIL_SERVER = os.environ.get('MAIL_SERVER')
-  MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
-  MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
-  MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-  MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+  MAIL_SERVER = os.environ.get('MAIL_SERVER') or os.getenv('MAIL_SERVER')
+  MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25) or os.getenv('MAIL_PORT')
+  MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None or os.getenv('MAIL_USE_TLS')
+  MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or os.getenv('MAIL_USERNAME')
+  MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or os.getenv('MAIL_PASSWORD')
   ADMINS = ['derekhawkins.tech@gmail.com', 'derekmhawkins@gmail.com']
   LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
   S3_LOCATION = f"https://{os.getenv('S3_BUCKET')}.s3.amazonaws.com/"

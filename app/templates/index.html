@@ -75,9 +75,9 @@
           <!-- masonry grid item 1-->
           {% for photo in photos %}
           <div class="col-md-4 col-sm-6 col-xs-12 grid-portfolio-item">
-            <a href="{{ url_for('portfolio_file', filename=photo.image) }}" data-description="slide 1" class="gallery-item-link">
+            <a href="{{ photo.image }}" data-description="slide 1" class="gallery-item-link">
               <div class="gallery-item-link-overlay"></div>
-              <img src="{{ url_for('portfolio_file', filename=photo.image) }}" alt="" class="img-responsive">
+              <img src="{{ photo.image }}" alt="" class="img-responsive">
               <div class="item-content">
                 <div class="item-content-wrapper">
                   <h3>{{ photo.model_name }}<span>{{ photo.event }}</span></h3>
