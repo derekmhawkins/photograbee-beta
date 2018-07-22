@@ -1,4 +1,4 @@
-from app import app, db, mail
+from app import app, db
 from app.models import User, Post, Category, Comment, Tag, Photo, Genre
 from flask_mail import Message
 
