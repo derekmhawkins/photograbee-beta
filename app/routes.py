@@ -225,6 +225,8 @@ def logout():
 @app.route('/admin/portfolio', methods=['GET', 'POST'])
 @login_required
 def admin_portfolio():
+  if not current_user.is_admin:
+    redirect(url_for('index'))
   context = {
     "portfolioForm": PortfolioForm(),
     "genre_choices": [(i.id, i.name) for i in Genre.query.all()],
@@ -247,6 +249,8 @@ def admin_portfolio():
 @app.route('/admin/blog', methods=['GET', 'POST'])
 @login_required
 def admin_blog():
+  if not current_user.is_admin:
+    redirect(url_for('index'))
   context = {
     "title": "Admin",
     "form": BlogForm(),
