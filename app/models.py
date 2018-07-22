@@ -32,7 +32,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(100))
-  image = db.Column(db.String(255), nullable=False)
+  image = db.Column(db.String(255), nullable=True)
   body = db.Column(db.Text)
   created_on = db.Column(db.DateTime, index=True, default=datetime.utcnow)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -233,15 +233,31 @@ def admin_blog():
   }
   context['form'].category.choices = context['categories']
   context['form'].tags.choices = context['tag_choices']
+  print(app.config['S3_BUCKET'])
   if context['form'].validate_on_submit():
     # Blog form
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-      os.makedirs(app.config['UPLOAD_FOLDER'])
-    filename = str(int(time.time())) + '.png'
-    context['form'].image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    post = Post(title=context['form'].title.data, image=filename, body=context['form'].body.data, author=current_user, category_id=context['form'].category.data)
+    # if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    #   os.makedirs(app.config['UPLOAD_FOLDER'])
+    # filename = str(int(time.time())) + '.png'
+    # context['form'].image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    S3_BUCKET = app.config['S3_BUCKET']
+    file_name = str(int(time.time()))
+    file_type = '.png'
+    s3 = boto3.client('s3')
+    presigned_post = s3.generate_presigned_post(
+      Bucket=S3_BUCKET,
+      Key=file_name,
+      Fields={"acl": "public-read", "Content-Type": file_type},
+      Conditions=[
+          {"acl": "public-read"},
+          {"Content-Type": file_type}
+      ],
+      ExpiresIn=3600
+    )
+    post = Post(title=context['form'].title.data, image=f'https://{S3_BUCKET}.s3.amazonaws.com/{file_name}', body=context['form'].body.data, author=current_user, category_id=context['form'].category.data)
     tags = [i.strip() for i in context['form'].tags.data.split(',')]
     names = [i.name for i in Tag.query.all()]
+
     # Add tags to posts
     for i in tags:
       if i not in names:
@@ -253,7 +269,11 @@ def admin_blog():
     db.session.add(post)
     db.session.commit()
     flash("Your post has submitted successfully")
-    return redirect(url_for('admin_blog'))
+
+    return json.dumps({
+        'data': presigned_post,
+        'url': f'https://{S3_BUCKET}.s3.amazonaws.com/{file_name}'
+    }), redirect(url_for('admin_blog'))
   return render_template("admin/blog.html", **context)
 
 
