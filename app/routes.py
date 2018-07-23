@@ -303,7 +303,7 @@ def add_category():
       db.session.add(Category(name=categoryForm.name.data))
       db.session.commit()
       flash('Category added.')
-    return redirect(url_for('admin'))
+    return redirect(url_for('admin_blog'))
 
 
 # @app.route('/admin', methods=['GET', 'POST'])
