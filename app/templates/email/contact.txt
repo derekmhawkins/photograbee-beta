@@ -1,4 +1,4 @@
-Dear {{ recipient_name }},
+Dear Shelby Cherie,
 
 You've been sent an inquiry via the contact form.
 
