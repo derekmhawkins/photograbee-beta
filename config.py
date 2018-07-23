@@ -22,7 +22,7 @@ class Config:
   MAILGUN_SMTP_PORT = os.environ.get('MAILGUN_SMTP_PORT') or os.getenv('MAILGUN_SMTP_PORT')
   MAILGUN_SMTP_SERVER = os.environ.get('MAILGUN_SMTP_SERVER') or os.getenv('MAILGUN_SMTP_SERVER')
   SECURITY_EMAIL_SENDER = 'derekhawkins.tech@gmail.com'
-  ADMINS = ['derekhawkins.tech@gmail.com', 'derekmhawkins@gmail.com']
+  ADMINS = ['derekhawkins.tech@gmail.com', 'freelycherie@gmail.com']
   LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
   S3_LOCATION = f"https://{os.getenv('S3_BUCKET')}.s3.amazonaws.com/"
 

@@ -11,7 +11,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 def send_contact_form_email():
   context = {
-    'recipient_name': app.config['ADMINS'][1],
+    'recipient_name': "Shelby Cherie",
     'sender_name': ContactForm().name.data,
     'sender_email': ContactForm().email.data,
     'sender_message': ContactForm().body.data
@@ -19,7 +19,7 @@ def send_contact_form_email():
   send_email(
     '[Photograbee] You have an inquiry', 
     sender='noreply@photograbee.com', 
-    recipients=[app.config['ADMINS'][0]],
+    recipients=[app.config['ADMINS'][:]],
     text_body=render_template('email/contact.txt', **context),
     html_body=render_template('email/contact.html', **context)
   )
