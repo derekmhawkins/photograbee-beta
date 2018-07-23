@@ -19,7 +19,7 @@ def send_contact_form_email():
   send_email(
     '[Photograbee] You have an inquiry', 
     sender='noreply@photograbee.com', 
-    recipients=[app.config['ADMINS'][:]],
+    recipients=[app.config['ADMINS'][0], app.config['ADMINS'][1]],
     text_body=render_template('email/contact.txt', **context),
     html_body=render_template('email/contact.html', **context)
   )
